@@ -81,10 +81,12 @@ def q10
   foods = %w(いか たこ うに しゃけ うにぎり うに軍艦 うに丼)
 
   # 以下に回答を記載
-if foods.include?("うに")
+foods.each do |food|
+ if food.include?("うに")
   puts "好物です"
-else
+ else
   puts "まぁまぁ好きです"
+ end
 end
 end
 
@@ -97,7 +99,7 @@ sports.uniq!
 puts "ユーザーの趣味一覧"
 sports.each.with_index(1) do |sport,i|
   puts "No#{i} #{sport}"
-end
+ end
 end
 
 def q12
@@ -129,18 +131,8 @@ def q15
   data2 = { name: "yamada", hobby: "baseball", role: "normal" }
 
   # 以下に回答を記載
-data1.key?(:age)
-if true
-  puts "OK"
-elsif false
-  puts "NG"
-end
-data2.key?(:age)
-if true
-  puts "OK"
-elsif false
-  puts "NG"
-end
+puts data1.key?(:age) ? "OK": "NG"
+puts data2.key?(:age) ? "OK": "NG"
 end
 
 def q16
