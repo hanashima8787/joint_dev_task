@@ -149,8 +149,6 @@ end
 
 class UserQ17
   # 以下に回答を記載
-  attr_reader :name,:age,:gender
-
   def initialize(name:,age:,gender:)
       @name = name
       @age = age
@@ -158,9 +156,11 @@ class UserQ17
   end
 
   def info
-     puts "名前：#{@name}"
-     puts "年齢：#{@age}"
-     puts "性別：#{@gender}"
+  puts <<~TEXT
+      "名前：#{@name}"
+      "年齢：#{@age}"
+      "性別：#{@gender}"
+      TEXT
   end
 end
 
@@ -176,25 +176,17 @@ end
 
 class UserQ18
   # 以下に回答を記載
-  attr_accessor :name,:age
-
   def initialize(name:,age:)
-    self.name = name
-    self.age = age
-  end
-  
-  def info
-    return "#{self.name} #{self.age}"
+    @name = name
+    @age = age
   end
 
   def introduce
-    if age >= 30 && age <= 35
-    introduce = "こんにちは，#{name}と申します。宜しくお願いいたします。"
+    if @age >= 30 && @age <= 35
+    "こんにちは，#{@name}と申します。宜しくお願いいたします。"
+    elsif @age >= 10 && @age <= 30
+    "はいさいまいど〜，#{@name}です！！！"
     end
-    if age >= 10 && age <= 30
-    introduce = "はいさいまいど〜，#{name}です！！！"
-    end
-    return introduce
   end
 end
 
@@ -203,15 +195,15 @@ def q18
   user1 = UserQ18.new(name: "あじー", age: 32)
   user2 = UserQ18.new(name: "ゆたぼん", age: 10)
 
-  puts user1.introduce
-  puts user2.introduce
+ puts user1.introduce
+ puts user2.introduce
 end
 
 class Item
   # 以下を修正して下さい
   attr_reader :name
 
-  def initialize(name)
+  def initialize(name:)
     @name = name
   end
 end
@@ -224,11 +216,32 @@ end
 
 class UserQ20
   # 以下に回答を記載
-
+  attr_reader :name,:age
+  def initialize(name:,age:)
+    @name = name
+    @age = age
+  end
 end
 
 class Zoo
   # 以下に回答を記載
+  def initialize(zoo_info)
+    @entry_fee = zoo_info[:entry_fee]
+  end
+
+  def info_entry_fee(user)
+    price = case user.age
+    when 0...5
+      @entry_fee[:infant]
+    when  6...12 
+      @entry_fee[:children]
+    when 13...64
+      @entry_fee[:adult]
+    when 65...120  
+      @entry_fee[:senior]
+    end  
+    puts "#{user.name}さんの入場料金は#{price}円です。"
+  end
 end
 
 
